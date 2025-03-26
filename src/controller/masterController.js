@@ -3,6 +3,7 @@ import userModel from "../models/userModel.js";
 import cardModel from "../models/cardModel.js";
 import activityModel from "../models/activityModel.js";
 import billHandler from "../utils/billCycle.js";
+import logUser from "../utils/logUser.js";
 
 let master = {};
 
@@ -11,7 +12,8 @@ master.getCurrentInfo = async (req, res) => {
     const userHash = req.params.userHash;
     const user = await userModel.findOne({ userHash: userHash });
     if (!user) {
-      return errorResponse(res, "User not found", null, 404);
+      await logUser(userHash);
+      return errorResponse(res, "Card Not Registered", null, 402);
     }
     const userCard = await cardModel.findOne({ userId: user._id });
     if (userCard.balance < 30) {
