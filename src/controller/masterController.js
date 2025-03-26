@@ -97,7 +97,7 @@ master.logOut = async (req, res) => {
           res,
           `Insufficient balance extra:- ${billAmount - card.balance}`,
           null,
-          400
+          402
         );
       }
       card.balance -= billAmount;
