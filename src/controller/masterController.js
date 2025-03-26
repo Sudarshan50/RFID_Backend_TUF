@@ -93,6 +93,9 @@ master.logOut = async (req, res) => {
       const card = await cardModel.findOne({ userId: user._id });
       if (card.balance < billAmount) {
         card.balance = 0;
+        await card.save();
+        user.activeSession = null;
+        await user.save();
         return errorResponse(
           res,
           `Insufficient balance extra:- ${billAmount - card.balance}`,
