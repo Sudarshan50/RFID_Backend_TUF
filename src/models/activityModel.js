@@ -26,6 +26,10 @@ const activitySchema = new mongoose.Schema({
     default: 0,
     required: true,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },  
 });
 
 export default mongoose.model("Activity", activitySchema);

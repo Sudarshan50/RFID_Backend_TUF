@@ -4,7 +4,6 @@ const logUser = async (userHash) => {
         await regis.findOne({ userHash: userHash }).then(async (user) => {
             if (!user) {
                 await regis.create({ userHash: userHash });
-                regis.save();
             }else{
                 return;
             }
