@@ -252,7 +252,7 @@ admin.removeUserAndCard = async (req, res) => {
     if (!user) {
       return errorResponse(res, "User not found", null, 404);
     }
-    if (user.activeSession === null) {
+    if (user.activeSession != null) {
       return errorResponse(res, "Please revoke any session", null, 409);
     }
     await userModel.findByIdAndDelete(user._id);
